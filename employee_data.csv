@@ -1,0 +1,20 @@
+import pandas as pd
+import numpy as np
+
+# Create synthetic dataset
+def create_synthetic_data():
+    np.random.seed(42)
+    num_records = 100
+    data = {
+        'timestamp': pd.date_range(start='2023-01-01', periods=num_records, freq='H'),
+        'employee_id': np.random.choice(['E1', 'E2', 'E3', 'E4', 'E5'], num_records),
+        'project': np.random.choice(['Project A', 'Project B', 'Project C'], num_records),
+        'access_location': np.random.choice(['Office', 'Restricted Area', 'Home'], num_records),
+        'communication_sentiment': np.random.choice(['Positive', 'Neutral', 'Negative'], num_records),
+        'geolocation': [(np.random.uniform(-90, 90), np.random.uniform(-180, 180)) for _ in range(num_records)]
+    }
+    return pd.DataFrame(data)
+
+# Save the dataset
+df = create_synthetic_data()
+df.to_csv('employee_data.csv', index=False)
